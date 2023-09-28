@@ -28,6 +28,8 @@ const App = () => {
         onPhotoClick={handleOnPhotoClick}
         isFavPhotoExist={isFavPhotoExist}
         toggleFavourite={toggleFavourite}
+        favPhotos = {state.isFavorited}
+
       />
       {isModalOpen && (
         <PhotoDetailsModal
@@ -35,6 +37,8 @@ const App = () => {
           selectedPhoto={selectedPhoto}
           isFavPhotoExist={isFavPhotoExist}
           toggleFavourite={toggleFavourite}
+          onPhotoClick={handleOnPhotoClick}
+          favPhotos = {state.isFavorited}
         />
       )}
     </div>

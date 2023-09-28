@@ -6,12 +6,10 @@ import PhotoFavButton from "components/PhotoFavButton";
 import PhotoList from "components/PhotoList";
 
 const PhotoDetailsModal = (props) => {
-  const { selectedPhoto } = props;
-  console.log("Selected photo", selectedPhoto);
+  const { selectedPhoto, favPhotos } = props;
   const imageUrl = selectedPhoto.urls.regular;
   const name = selectedPhoto.user.name;
 
-  //const {city, country} = selectedPhoto.location;
 
   const locationCity = selectedPhoto.location.city;
   const locationCountry = selectedPhoto.location.country;
@@ -30,8 +28,9 @@ const PhotoDetailsModal = (props) => {
 
       <div className="photo-details-modal__images">
         <PhotoFavButton
-          photo={props.photo}
+          photo={selectedPhoto}
           addFavourite={props.toggleFavourite}
+          favPhotos={favPhotos}
         />
         <img
           className="photo-details-modal__image"
@@ -56,7 +55,8 @@ const PhotoDetailsModal = (props) => {
       <PhotoList
         photos={similarPhotos}
         toggleFavourite={props.toggleFavourite}
-        onPhotoClick={props.onPhotoClick}
+        onPhotoClick= {() => {}}
+        favPhotos={favPhotos}
       />
     </div>
   );

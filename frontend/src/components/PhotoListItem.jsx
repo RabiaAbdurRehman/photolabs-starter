@@ -11,7 +11,12 @@ const PhotoListItem = (props) => {
         props.onPhotoClick(props.photo);
       }}
     >
-      <PhotoFavButton photo={props.photo} addFavourite={props.addFavourite} />
+      <PhotoFavButton
+      photo={props.photo}
+      addFavourite={props.addFavourite}
+      favPhotos ={props.favPhotos}
+
+      />
       <img
         className="photo-list__image"
         src={props.imageSource}
