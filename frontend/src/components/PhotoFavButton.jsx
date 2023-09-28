@@ -4,7 +4,6 @@ import FavIcon from "./FavIcon";
 import "../styles/PhotoFavButton.scss";
 
 function PhotoFavButton(props) {
-  //const [clicked, setClicked] = useState(false);
   const liked = props.favPhotos.includes(props.photo.id);
   function handleClick(e) {
     //setClicked(!clicked);
