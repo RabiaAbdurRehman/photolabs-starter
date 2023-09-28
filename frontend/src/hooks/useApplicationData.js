@@ -41,7 +41,7 @@ const reducer = (state, action) => {
     case "SEARCH_PHOTO":
       return {
         ...state,
-        searchPhoto: action.payload,
+        searchPhoto: action.payload,//photos instead of searchPhoto
       };
     case "TOGGLE_MODAL":
       return {
@@ -62,7 +62,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         isFavorited: state.isFavorited.filter(
-          (photos) => photos != action.payload
+          (photo) => photo !== action.payload
         ),
       };
     case "GET_PHOTOS_BY_TOPICS":
@@ -78,7 +78,8 @@ const reducer = (state, action) => {
 export const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
+  const fetchPhotos = () => {
+
     axios
       .get(photoState)
       .then((response) =>
@@ -90,6 +91,10 @@ export const useApplicationData = () => {
       .catch((error) => {
         console.error("API Error:", error);
       });
+  }
+
+  useEffect(() => {
+    fetchPhotos()
   }, []);
   useEffect(() => {
     axios
@@ -107,7 +112,7 @@ export const useApplicationData = () => {
 
   const handleImageFetch = (topicId) => {
     axios
-      .get(`api/topics/photos/${topicId}`)
+      .get(`/api/topics/photos/${topicId}`)
       .then((response) =>
         dispatch({
           type: ACTIONS.SEARCH_PHOTO,
@@ -124,6 +129,8 @@ export const useApplicationData = () => {
     axios
     .get(`/api/search/${photo}`)
     .then((response) =>
+
+
       dispatch({
         type: ACTIONS.SET_PHOTO_DATA,
         payload: response.data,
@@ -132,10 +139,12 @@ export const useApplicationData = () => {
     .catch((error) => {
       console.error("API Error:", error);
     });
-    console.log(`Searching for: ${photo}`);
+    //console.log("Response", response.data);
+
   }
 
   const handleOnPhotoClick = (photo) => {
+    //console.log("handleOnPhotoClick called with photo:", photo);
     dispatch({
       type: ACTIONS.SELECTED_PHOTO_DETAIL,
       payload: photo,
@@ -155,6 +164,7 @@ export const useApplicationData = () => {
   };
 
   const toggleFavourite = (photo) => {
+    //console.log("can I see a single photo", photo)
     if (state.isFavorited.includes(photo)) {
       dispatch({
         type: ACTIONS.FAV_PHOTO_REMOVED,
@@ -178,6 +188,7 @@ export const useApplicationData = () => {
     handleCloseModal,
     toggleFavourite,
     handleSearch,
+    fetchPhotos,
   };
 };
 //its adding whole array of object(photo) in isfavourited.

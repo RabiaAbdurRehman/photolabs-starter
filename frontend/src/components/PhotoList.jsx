@@ -15,7 +15,14 @@ const PhotoList = (props) => {
           profile={photo.user.profile}
           username={photo.user.username}
           location={photo.location}
-          onPhotoClick={props.onPhotoClick} // Open the modal when a photo is clicked
+          // onPhotoClick={props.onPhotoClick} // Open the modal when a photo is clicked
+          onPhotoClick={() => {
+            console.log("Similar photo clicked:", photo);
+            props.onPhotoClick(photo);
+          }}
+          favPhotos ={props.favPhotos}
+          fetchPhotos = {props.fetchPhotos}
+
         />
       ))}
     </ul>

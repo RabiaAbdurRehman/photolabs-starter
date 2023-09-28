@@ -6,8 +6,8 @@ import PhotoFavButton from "components/PhotoFavButton";
 import PhotoList from "components/PhotoList";
 
 const PhotoDetailsModal = (props) => {
-  const { selectedPhoto } = props;
-  console.log("Selected photo", selectedPhoto);
+  const { selectedPhoto, favPhotos } = props;
+  //console.log("Selected photo", selectedPhoto);
   const imageUrl = selectedPhoto.urls.regular;
   const name = selectedPhoto.user.name;
 
@@ -30,8 +30,10 @@ const PhotoDetailsModal = (props) => {
 
       <div className="photo-details-modal__images">
         <PhotoFavButton
-          photo={props.photo}
+          photo={selectedPhoto}
           addFavourite={props.toggleFavourite}
+          favPhotos={favPhotos}
+          fetchPhotos={props.fetchPhotos}
         />
         <img
           className="photo-details-modal__image"
@@ -57,7 +59,9 @@ const PhotoDetailsModal = (props) => {
         className="photo-list"
         photos={similarPhotos}
         toggleFavourite={props.toggleFavourite}
-        onPhotoClick={props.onPhotoClick}
+        onPhotoClick= {() => {}}
+        favPhotos={favPhotos}
+        fetchPhotos={props.fetchPhotos}
       />
     </div>
   );

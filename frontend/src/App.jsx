@@ -18,6 +18,7 @@ const App = () => {
     handleCloseModal,
     toggleFavourite,
     handleSearch,
+    fetchPhotos,
   } = useApplicationData();
 
   return (
@@ -30,6 +31,8 @@ const App = () => {
         isFavPhotoExist={isFavPhotoExist}
         toggleFavourite={toggleFavourite}
         handleSearch={handleSearch}
+        favPhotos = {state.isFavorited}
+        fetchPhotos = {fetchPhotos}
       />
       {isModalOpen && (
         <PhotoDetailsModal
@@ -37,6 +40,9 @@ const App = () => {
           selectedPhoto={selectedPhoto}
           isFavPhotoExist={isFavPhotoExist}
           toggleFavourite={toggleFavourite}
+          onPhotoClick={handleOnPhotoClick}
+          favPhotos = {state.isFavorited}
+          fetchPhotos = {fetchPhotos}
         />
       )}
     </div>
